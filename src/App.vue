@@ -26,6 +26,9 @@
 
 <style>
 	/* 头条小程序需要把 iconfont 样式放到组件外 */
+	@import url('./common/colorui/main.css');
+	@import url('./common/colorui/icon.css');
+	
 	@import "components/m-icon/m-icon.css";
 
 	/*每个页面公共css */

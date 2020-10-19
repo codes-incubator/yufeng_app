@@ -17,8 +17,48 @@
 				<view>这是 uni-app 带登录模板的示例App首页。</view>
 				<view>在 “我的” 中点击 “登录” 可以 “登录您的账户”</view>
 			</view>
+			<view>
+				<uni-badge text="1"></uni-badge>
+				<uni-badge text="2" type="success" @click="bindClick"></uni-badge>
+				<uni-badge text="3" type="primary" :inverted="true"></uni-badge>
+			</view>
+			<view>
+			<button class="cu-btn bg-red margin-tb-sm lg" role="button" aria-disabled="false">嫣红</button>
+		</view>
+		<view>
+			<view class="cu-bar tabbar bg-white">
+				<view class="action">
+					<view class="cuIcon-cu-image">
+						<image src="/static/tabbar/basics_cur.png"></image>
+					</view>
+					<view class="text-green">元素</view>
+				</view>
+				<view class="action">
+					<view class="cuIcon-cu-image">
+						<image src="/static/tabbar/component.png"></image>
+					</view>
+					<view class="text-gray">组件</view>
+				</view>
+				<view class="action">
+					<view class="cuIcon-cu-image">
+						<image src="/static/tabbar/plugin.png"></image>
+						<view class="cu-tag badge">99</view>
+					</view>
+					<view class="text-gray">扩展</view>
+				</view>
+				<view class="action">
+					<view class="cuIcon-cu-image">
+						<image src="/static/tabbar/about.png"></image>
+						<view class="cu-tag badge"></view>
+					</view>
+					<view class="text-gray">关于</view>
+				</view>
+			</view>
+		</view>
 		</view>
 	</view>
+
+
 </template>
 
 <script>
@@ -27,8 +67,13 @@
 		mapMutations
 	} from 'vuex'
 
+	import {uniBadge} from '@dcloudio/uni-ui'
+	//import uniBadge from '@dcloudio/uni-ui/lib/uni-badge/uni-badge.vue' //也可使用此方式引入组件
+
+
 	export default {
 		computed: mapState(['forcedLogin', 'hasLogin', 'userName']),
+		components: {uniBadge},
 		onLoad() {
 			const loginType = uni.getStorageSync('login_type')
 			if (loginType === 'local') {
@@ -105,24 +150,5 @@
 </script>
 
 <style>
-	.hello {
-		display: flex;
-		flex: 1;
-		flex-direction: column;
-	}
 
-	.title {
-		color: #8f8f94;
-		margin-top: 25px;
-	}
-
-	.ul {
-		font-size: 15px;
-		color: #8f8f94;
-		margin-top: 25px;
-	}
-
-	.ul>view {
-		line-height: 25px;
-	}
 </style>
