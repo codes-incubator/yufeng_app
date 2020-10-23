@@ -169,7 +169,7 @@
 		height: 240rpx;
 		padding: 20rpx;
 		box-sizing: border-box;
-		background-color: #0faeff;
+		background-color: #9da2a3;
 		flex-direction: row;
 		align-items: center;
 	}
