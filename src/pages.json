@@ -103,6 +103,11 @@
 				"name": "test", //模式名称
 				"path": "pages/test/test", //启动页面，必选
 				"query": "interval=4000&autoplay=false" //启动参数，在页面的onLoad函数里面得到。
+			},
+			{
+				"name": "login", //模式名称
+				"path": "pages/login/login", //启动页面，必选
+				"query": "interval=4000&autoplay=false" //启动参数，在页面的onLoad函数里面得到。
 			}
 		]
 	}
