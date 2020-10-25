@@ -11,6 +11,16 @@
 				"navigationBarTitleText": "合作车店"
 			}
 		}, {
+			"path": "pages/shop/shopmap/shopmap",
+			"style": {
+				"navigationBarTitleText": "车店地图地址"
+			}
+		},{
+			"path": "pages/coupons/coupons",
+			"style": {
+				"navigationBarTitleText": "我的优惠券"
+			}
+		},{
 			"path": "pages/login/login",
 			"style": {
 				"navigationBarTitleText": "登录"

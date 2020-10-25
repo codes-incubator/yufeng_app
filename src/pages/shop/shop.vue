@@ -1,156 +1,153 @@
 <template>
-	<view class="content">
-		<view v-if="hasLogin" class="hello">
-			<view class="title">
-				您好 {{userName}}，您已成功登录。
-			</view>
-			<view class="ul">
-				<view>这是 uni-app 带登录模板的示例App首页。</view>
-				<view>在 “我的” 中点击 “退出” 可以 “注销当前账户”</view>
-			</view>
-		</view>
-		<view v-if="!hasLogin" class="hello">
-			<view class="title">
-				您好 游客。
-			</view>
-			<view class="ul">
-				<view>这是 uni-app shop。</view>
-				<view>shop list”</view>
-			</view>
-			<view>
-				<uni-badge text="1"></uni-badge>
-				<uni-badge text="2" type="success" @click="bindClick"></uni-badge>
-				<uni-badge text="3" type="primary" :inverted="true"></uni-badge>
-			</view>
-			<view>
-			<button class="cu-btn bg-red margin-tb-sm lg" role="button" aria-disabled="false">嫣红</button>
-		</view>
-		<view>
-			<view class="cu-bar tabbar bg-white">
-				<view class="action">
-					<view class="cuIcon-cu-image">
-						<!-- <image src="/static/tabbar/basics_cur.png"></image> -->
-						<text class="lg text-gray cuIcon-my"></text>
-					</view>
-					<view class="text-green">元素</view>
-				</view>
-				<view class="action">
-					<view class="cuIcon-cu-image">
-						<!-- <image src="/static/tabbar/component.png"></image> -->
-						<text class="lg text-gray cuIcon-myfill"></text>
-					</view>
-					<view class="text-gray">组件</view>
-				</view>
-				<view class="action">
-					<view class="cuIcon-cu-image">
-						<!-- <image src="/static/tabbar/plugin.png"></image> -->
-						<text class="lg text-gray cuIcon-emoji"></text>
-						<view class="cu-tag badge">99</view>
-					</view>
-					<view class="text-gray">扩展</view>
-				</view>
-				<view class="action">
-					<view class="cuIcon-cu-image">
-						<!-- <image src="/static/tabbar/about.png"></image> -->
-						<text class="lg text-gray cuIcon-favor"></text>
-						<view class="cu-tag badge"></view>
-					</view>
-					<view class="text-gray">关于</view>
-				</view>
-			</view>
-		</view>
-		</view>
-	</view>
+  <view class="content">
+ 
+    <!-- 左侧显示略缩图、图标 -->
+    <uni-list>
+      <uni-list-item
+        title="闵行区车商"
+        note="在闵行区解放路路口"
+		thumb="https://ftp.bmp.ovh/imgs/2020/10/052febbf70e8aa67.png"
+		thumbSize="lg"
+		showExtraIcon="false"
+        extraIcon="{color: '#4cd964',size: '22',type: 'spinner'}"
+        rightText="地址详情"
+		link to="/pages/shop/shopmap/shopmap" 
+		@click="onClick($event,1)"
+      ></uni-list-item>
+	  <uni-list-item
+        title="浦东新区车商"
+        note="在闵行区解放路路口"
+		thumb="https://ftp.bmp.ovh/imgs/2020/10/052febbf70e8aa67.png"
+		thumbSize="lg"
+		showExtraIcon="false"
+        extraIcon="{color: '#4cd964',size: '22',type: 'spinner'}"
+        rightText="地址详情 >"
+      ></uni-list-item>
+	  <uni-list-item
+        title="黄埔区车商"
+        note="在闵行区解放路路口"
+		thumb="https://ftp.bmp.ovh/imgs/2020/10/052febbf70e8aa67.png"
+		thumbSize="lg"
+		showExtraIcon="false"
+        extraIcon="{color: '#4cd964',size: '22',type: 'spinner'}"
+        rightText="地址详情 >"
+      ></uni-list-item>
+	  <uni-list-item
+        title="奉贤区车商"
+        note="在闵行区解放路路口"
+		thumb="https://ftp.bmp.ovh/imgs/2020/10/052febbf70e8aa67.png"
+		thumbSize="lg"
+		showExtraIcon="false"
+        extraIcon="{color: '#4cd964',size: '22',type: 'spinner'}"
+        rightText="地址详情 >"
+      ></uni-list-item>
+	  <uni-list-item
+        title="青浦区车商"
+        note="在闵行区解放路路口"
+		thumb="https://ftp.bmp.ovh/imgs/2020/10/052febbf70e8aa67.png"
+		thumbSize="lg"
+		showExtraIcon="false"
+        extraIcon="{color: '#4cd964',size: '22',type: 'spinner'}"
+        rightText="地址详情 >"
+      ></uni-list-item>
+	  <uni-list-item
+        title="静安区车商"
+        note="在闵行区解放路路口"
+		thumb="https://ftp.bmp.ovh/imgs/2020/10/052febbf70e8aa67.png"
+		thumbSize="lg"
+		showExtraIcon="false"
+        extraIcon="{color: '#4cd964',size: '22',type: 'spinner'}"
+        rightText="地址详情 >"
+      ></uni-list-item>
+    </uni-list>
+  </view>
 </template>
 
 <script>
-	import {
-		mapState,
-		mapMutations
-	} from 'vuex'
+import { mapState, mapMutations } from "vuex";
 
-	import {uniBadge} from '@dcloudio/uni-ui'
-	//import uniBadge from '@dcloudio/uni-ui/lib/uni-badge/uni-badge.vue' //也可使用此方式引入组件
+import { uniIcons, uniList, uniListItem, uniListChat } from "@dcloudio/uni-ui";
+//import uniBadge from '@dcloudio/uni-ui/lib/uni-badge/uni-badge.vue' //也可使用此方式引入组件
 
+export default {
+  computed: mapState(["forcedLogin", "hasLogin", "userName"]),
+  components: { uniIcons, uniList, uniListItem, uniListChat },
+  onLoad() {
+    const loginType = uni.getStorageSync("login_type");
+    if (loginType === "local") {
+      this.login(uni.getStorageSync("username"));
+      return;
+    }
+    let uniIdToken = uni.getStorageSync("uniIdToken");
+    if (uniIdToken) {
+      this.login(uni.getStorageSync("username"));
+      uniCloud.callFunction({
+        name: "user-center",
+        data: {
+          action: "checkToken",
+        },
+        success: (e) => {
+          console.log("checkToken success", e);
 
-	export default {
-		computed: mapState(['forcedLogin', 'hasLogin', 'userName']),
-		components: {uniBadge},
-		onLoad() {
-			const loginType = uni.getStorageSync('login_type')
-			if (loginType === 'local') {
-				this.login(uni.getStorageSync('username'))
-				return
-			}
-			let uniIdToken = uni.getStorageSync('uniIdToken')
-			if (uniIdToken) {
-				this.login(uni.getStorageSync('username'))
-				uniCloud.callFunction({
-					name: 'user-center',
-					data: {
-						action: 'checkToken',
-					},
-					success: (e) => {
-
-						console.log('checkToken success', e);
-
-						if (e.result.code > 0) {
-							//token过期或token不合法，重新登录
-							if (this.forcedLogin) {
-								uni.reLaunch({
-									url: '../login/login'
-								});
-							} else {
-								uni.navigateTo({
-									url: '../login/login'
-								});
-							}
-						}
-					},
-					fail(e) {
-						uni.showModal({
-							content: JSON.stringify(e),
-							showCancel: false
-						})
-					}
-				})
-			} else {
-				this.guideToLogin()
-			}
-		},
-		methods: {
-			...mapMutations(['login']),
-			guideToLogin() {
-				uni.showModal({
-					title: '未登录',
-					content: '您未登录，需要登录后才能继续',
-					/**
-					 * 如果需要强制登录，不显示取消按钮
-					 */
-					showCancel: !this.forcedLogin,
-					success: (res) => {
-						if (res.confirm) {
-							/**
-							 * 如果需要强制登录，使用reLaunch方式
-							 */
-							if (this.forcedLogin) {
-								uni.reLaunch({
-									url: '../login/login'
-								});
-							} else {
-								uni.navigateTo({
-									url: '../login/login'
-								});
-							}
-						}
-					}
-				});
-			}
-		}
-
+          if (e.result.code > 0) {
+            //token过期或token不合法，重新登录
+            if (this.forcedLogin) {
+              uni.reLaunch({
+                url: "../login/login",
+              });
+            } else {
+              uni.navigateTo({
+                url: "../login/login",
+              });
+            }
+          }
+        },
+        fail(e) {
+          uni.showModal({
+            content: JSON.stringify(e),
+            showCancel: false,
+          });
+        },
+      });
+    } else {
+      this.guideToLogin();
+    }
+  },
+  methods: {
+    ...mapMutations(["login"]),
+    guideToLogin() {
+      uni.showModal({
+        title: "未登录",
+        content: "您未登录，需要登录后才能继续",
+        /**
+         * 如果需要强制登录，不显示取消按钮
+         */
+        showCancel: !this.forcedLogin,
+        success: (res) => {
+          if (res.confirm) {
+            /**
+             * 如果需要强制登录，使用reLaunch方式
+             */
+            if (this.forcedLogin) {
+              uni.reLaunch({
+                url: "../login/login",
+              });
+            } else {
+              uni.navigateTo({
+                url: "../login/login",
+              });
+            }
+          }
+        },
+      });
+	},
+	onClick(event, num){
+		console.log(event)
+		console.log(num)
 	}
+  },
+};
 </script>
 
 <style>
-
 </style>
